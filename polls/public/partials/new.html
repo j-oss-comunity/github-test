@@ -1,0 +1,97 @@
+<div class="page-header">
+	<h1>アンケートの新規作成</h1>
+</div>
+
+<form role="form" ng-submit="createPoll()" name="pollForm">
+	<div class="form-group">
+		<label for="pollTitle">タイトル</label>
+		<input type="text" ng-model="poll.title" class="form-control" id="pollTitle" placeholder="タイトルを入力します" />
+	</div>
+	<label for="">質問</label>
+	<div class="form-group row">
+		<div class="col-xs-8">
+			<textarea ng-model="poll.question" class="form-control" id="pollQuestion" rows="4" placeholder="質問文を入力します"></textarea>
+		</div>
+		<div class="col-xs-4">
+			<input class="form-control" id="pollQuestionImgFile" type="file" fileread="poll.questionImg" />
+			<input type="text" ng-model="poll.questionImg" style="display: none;" />
+			<label class="radio-inline">
+				<input type="radio" ng-model="poll.questionImgSide" name="questionRadio" value="left" checked="true" />
+				左に挿入
+			</label>
+			<label class="radio-inline">
+				<input type="radio" ng-model="poll.questionImgSide" name="questionRadio" value="right" />
+				右に挿入
+			</label>
+		</div>
+	</div>
+	
+	<label>選択肢</label>
+	<div ng-repeat="choice in poll.choices" class="form-group row">
+		<div class="col-xs-8">
+			<textarea ng-model="choice.text" class="form-control" rows="4" placeholder="選択肢{{$index+1}} の文章を入力します"></textarea>
+		</div>
+		<div class="col-xs-4">
+			<input class="form-control" type="file" fileread="choice.img" />
+			<input type="text" ng-model="choice.img" style="display: none;" />
+			<label class="radio-inline">
+				<input type="radio" ng-model="choice.imgSide" name="choice{{$index+1}}Radio" value="left" checked="true" />
+				左に挿入
+			</label>
+			<label class="radio-inline">
+				<input type="radio" ng-model="choice.imgSide" name="choice{{$index+1}}Radio" value="right" />
+				右に挿入
+			</label>
+		</div>
+	</div>
+	<button type="button" class="form-control btn btn-default" ng-click="addChoice()"><span class="glyphicon glyphicon-plus"></span> 選択肢を追加する</button>
+	<hr />
+	<label for="openDatepicker">開始日時</label>
+	<div class="form-group row">
+		<div class="form-inline">
+			<!-- Datepicker -->
+			<div class="col-xs-4 input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</div>
+				<input type="date" id="pollOpenDate" class="form-control" />
+			</div>
+			<!-- TimePicker -->
+			<div class="col-xs-4 input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</div>
+				<input type="time" id="pollOpenTime" class="form-control" step="300" />
+			</div>
+		</div>
+	</div>
+	<label for="closeDatepicker">終了日時</label>
+	<div class="form-group row">
+		<div class="form-inline">
+			<!-- Datepicker -->
+			<div class="col-xs-4 input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</div>
+				<input type="date" id="pollCloseDate" class="form-control" />
+			</div>
+			<!-- TimePicker -->
+			<div class="col-xs-4 input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</div>
+				<input type="time" id="pollCloseTime" class="form-control" step="300" />
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-xs-6">
+			<a href="#/polls" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> 一覧に戻る</a>
+		</div>
+		<div class="col-xs-6">
+			<button class="btn btn-primary pull-right" type="submit">作成 &raquo;</button>
+		</div>
+	</div>
+	<hr />
+</form>

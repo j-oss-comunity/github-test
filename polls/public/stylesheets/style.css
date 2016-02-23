@@ -1,0 +1,61 @@
+body {
+	width: auto;
+	height: 100%;
+}
+
+.tab-content .lead {
+	margin-top: 20px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  background-color: #222;
+  text-align: right;
+}
+
+#renderpoint {
+  overflow: auto;
+  position: absolute;
+  top: 60px;
+  bottom: 30px;
+  left: 20px;
+  right: 20px;
+}
+
+.pollsRank {
+	font-style: italic;
+//	color: #992;
+	animation-name: anime1;
+	animation-duration: 1s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+}
+
+@keyframes anime1 {
+	0% {color: #da5;}
+	50% {color: #550;}
+	100% {color: #da5;}
+}
+
+.pollsVoted {
+	font-style: italic;
+	color: #da5;
+}
+
+.paddingTop {
+	padding-top: 5px;
+}
+
+/*
+.progress-bar {
+	 transition: width 1s ease-in-out;
+	 -o-transition: width 1s ease-in-out;
+	 -moz-transition: width 1s ease-in-out;
+	 -webkit-transition: width 1s ease-in-out;
+	 -ms-transition: width 1s ease-in-out;
+}
+*/
