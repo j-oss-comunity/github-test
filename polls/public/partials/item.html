@@ -16,10 +16,11 @@
 	</div>
 </div>
 
-<!-- 投票後はhiddenにする
+<!-- TODO：closeDateTimeと現在時刻を比較してhide
 <form role="form" ng-hide="poll.userVoted" ng-submit="vote()">
  -->
-<form role="form" ng-submit="vote()">
+<!-- 投票後 -->
+<form role="form" ng-show="isOpen(poll) && !poll.userVoted || debug" ng-submit="vote()">
 	<!-- アンケート選択肢 -->
 	<label style="width:100%;" ng-repeat="choice in poll.choices">
 		<div class="row pollChoiceRowBox">
@@ -41,16 +42,19 @@
 			<a href="#/polls" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> 一覧に戻る</a>
 		</div>
 		<div class="col-xs-6">
-			<button class="btn btn-primary pull-right" type="submit" id="pollVoteSubmit" ng-disabled="!poll.userVote" >投票する &raquo;</button>
+			<button class="btn btn-primary pull-right" type="submit" id="pollVoteSubmit" ng-disabled="!poll.userVote">投票する &raquo;</button>
 		</div>
 	</div>
 	<hr />
 </form>
-<div ng-show="poll.userVoted">
+<div ng-show="!isOpen(poll) || poll.userVoted || debug">
 	<!-- グラフ -->
 	<div class="row paddingTop" ng-repeat="choice in poll.choices">
 		<div class="col-xs-1">
-			<span class="pollsRank" ng-hide="poll.maxVoteLength > choice.votes.length">1st!!</span>
+			<span class="pollsRank" ng-hide="poll.maxVoteLength > choice.votes.length">
+				1st !!
+				<span class="glyphicon glyphicon-thumbs-up"></span>
+			</span>
 		</div>
 		<div class="col-xs-1" ng-hide="choice.img=='' || choice.imgSide!='left'">
 			<img class="img-responsive" alt="choice image" ng-src="{{choice.img}}" />
@@ -61,7 +65,7 @@
 		</div>
 		<div class="col-xs-6">
 			<div class="progress">
-				<div class="progress-bar progress-bar-striped active"
+				<div class="progress-bar progress-bar-info progress-bar-striped active"
 					 role="progressbar"
 					 aria-valuenow="{{choice.votes.length / Math.ceil(poll.maxVoteLength / 10) / 10 * 100}}"
 					 aria-valuemin="0"
@@ -72,7 +76,10 @@
 			</div>
 		</div>
 		<div class="col-xs-2">
-			<span class="pollsVoted" ng-hide="poll.userChoice._id!=choice._id">投票しました</span>
+			<span class="pollsVoted" ng-hide="poll.userChoice._id!=choice._id">
+				<span class="glyphicon glyphicon-flag"></span>
+				投票しました
+			</span>
 		</div>
 	</div>
 	<p><hr /></p>
@@ -83,4 +90,9 @@
 	</div>
 </div>
 
+<div class="row">
+	<input class="pull-right" type="checkbox" ng-model="debug" checked="false" />
+</div>
+
 <p>&nbsp;</p>
+

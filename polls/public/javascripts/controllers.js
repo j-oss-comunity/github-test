@@ -45,7 +45,7 @@ function PollListCtrl($scope, Poll) {
 		console.log(status);
 		console.log(now);
 		console.log(openDateStr);
-		if(openDateStr != null) {
+		if(openDateStr != null && openDateStr.length > 0) {
 			var openDate = new Date(openDateStr);
 			if(now < openDate) {
 				status = STATUS.wait;
@@ -55,7 +55,7 @@ function PollListCtrl($scope, Poll) {
 		}
 		var closeDateStr = poll.closeDateTime;
 		console.log(closeDateStr);
-		if(closeDateStr != null) {
+		if(closeDateStr != null && closeDateStr.length > 0) {
 			var closeDate = new Date(closeDateStr);
 			if(now < closeDate) {
 				status = STATUS.open;
@@ -93,7 +93,10 @@ function PollItemCtrl($scope, $routeParams, socket, Poll) {
 		if(data._id === $routeParams.pollId) {
 			$scope.poll.choices = data.choices;
 			$scope.poll.totalVotes = data.totalVotes;
-		}		
+			$scope.poll.maxVoteLength = data.maxVoteLength;
+			
+			console.log("", data);
+		}
 	});
 	
 	$scope.vote = function() {
@@ -110,6 +113,30 @@ function PollItemCtrl($scope, $routeParams, socket, Poll) {
 	
 	// to use Math class
 	$scope.Math = Math;
+	
+	
+	$scope.isOpen = function(poll) {
+		if(poll == null) {
+			console.log("isOpen : poll must not be null!");
+			return false;
+		}
+		var isOpen = true;
+		var now = new Date(Date.now());
+		var openDateStr = poll.openDateTime;
+		var closeDateStr = poll.closeDateTime;
+		console.log(now);
+		console.log(openDateStr);
+		console.log(closeDateStr);
+		if(openDateStr != null && openDateStr.length > 0) {
+			var openDate = new Date(openDateStr);
+			isOpen = now >= openDate;
+		}
+		if(closeDateStr != null && closeDateStr.length > 0) {
+			var closeDate = new Date(closeDateStr);
+			isOpen = (now <= closeDate) && isOpen;
+		}
+		return isOpen;
+	};
 }
 
 // Controller for creating a new poll

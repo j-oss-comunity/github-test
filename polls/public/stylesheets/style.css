@@ -1,10 +1,18 @@
 body {
 	width: auto;
 	height: 100%;
+//	background: #bdc3c7;
+//	background: #95a5a6;
+	background: rgba(149, 165, 166, 0.25);
+//	background: hsla(184, 9%, 62%, 1);
 }
 
 .tab-content .lead {
 	margin-top: 20px;
+}
+
+.navbar-inverse {
+  background-color: rgba(52, 73, 94, 1);
 }
 
 .footer {
@@ -13,8 +21,10 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 30px;
-  background-color: #222;
+  background-color: rgba(52, 73, 94, 1);
+  // background: rgba(44, 62, 80, 1);
   text-align: right;
+  color: #ddd;
 }
 
 #renderpoint {
@@ -26,36 +36,49 @@ body {
   right: 20px;
 }
 
+.pollsVoted {
+	font-style: italic;
+	color: #e67e22;
+}
+
 .pollsRank {
 	font-style: italic;
 //	color: #992;
-	animation-name: anime1;
+	animation-name: orangeColorFlash;
 	animation-duration: 1s;
 	animation-timing-function: ease;
 	animation-iteration-count: infinite;
 }
 
-@keyframes anime1 {
-	0% {color: #da5;}
-	50% {color: #550;}
-	100% {color: #da5;}
+.progress {
+	animation-name: blueGrow;
+	animation-duration: 5s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
 }
 
-.pollsVoted {
-	font-style: italic;
-	color: #da5;
+@keyframes orangeColorFlash {
+	0% {color: #f1c40f;}
+	50% {color: #550;}
+	100% {color: #f1c40f;}
+}
+
+
+@keyframes blueGrow {
+	0% {box-shadow: 0 0 20px #aff;}
+	50% {box-shadow: 0 0 0px #fff;}
+	100% {box-shadow: 0 0 20px #aff;}
 }
 
 .paddingTop {
 	padding-top: 5px;
 }
 
-/*
 .progress-bar {
-	 transition: width 1s ease-in-out;
-	 -o-transition: width 1s ease-in-out;
-	 -moz-transition: width 1s ease-in-out;
-	 -webkit-transition: width 1s ease-in-out;
-	 -ms-transition: width 1s ease-in-out;
+//	 transition: width 1s ease-in-out;
+//	 -o-transition: width 1s ease-in-out;
+//	 -moz-transition: width 1s ease-in-out;
+//	 -webkit-transition: width 1s ease-in-out;
+//	 -ms-transition: width 1s ease-in-out;
+box-shadow: 0 0 5px 0 #fff;
 }
-*/
