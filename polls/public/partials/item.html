@@ -6,12 +6,12 @@
 <!-- アンケート本文 -->
 <div class="row">
 	<!-- 左画像挿入のときshow, そうでないときhidden -->
-	<div ng-hide="poll.questionImg==''||poll.questionImgSide!='left'" class="col-xs-2">
+	<div ng-show="hasImg(poll.questionImg) && isLeft(poll.questionImgSide)" class="col-xs-2">
 		<img class="img-responsive" alt="" ng-src="{{poll.questionImg}}" />
 	</div>
 	<p class="col-xs-10 lead">{{poll.question}}</p>
 	<!-- 右画像挿入のときshow -->
-	<div ng-hide="poll.questionImg==''||poll.questionImgSide!='right'" class="col-xs-2">
+	<div ng-show="hasImg(poll.questionImg) && !isLeft(poll.questionImgSide)" class="col-xs-2">
 		<img class="img-responsive" alt="" ng-src="{{poll.questionImg}}" />
 	</div>
 </div>
@@ -24,14 +24,16 @@
 	<!-- アンケート選択肢 -->
 	<label style="width:100%;" ng-repeat="choice in poll.choices">
 		<div class="row pollChoiceRowBox">
-			<div class="col-xs-2 col-xs-offset-1 radio">
+			<div class="col-xs-1 col-xs-offset-1 radio">
 				<input type="radio" name="choice" ng-model="poll.userVote" value="{{choice._id}}" />
-				<img class="img-responsive" alt="" ng-src="{{choice.img}}" ng-hide="choice.img=='' || choice.imgSide!='left'" />
 			</div>
-			<p class="col-xs-7">
+			<div class="col-xs-2" ng-show="hasImg(choice.img) && isLeft(choice.imgSide)">
+				<img class="img-responsive" alt="" ng-src="{{choice.img}}" />
+			</div>
+			<p class="col-xs-6">
 				{{choice.text}}
 			</p>
-			<div class="col-xs-2" ng-hide="choice.img=='' || choice.imgSide!='right'">
+			<div class="col-xs-2" ng-show="hasImg(choice.img) && !isLeft(choice.imgSide)">
 				<img class="img-responsive" alt="" ng-src="{{choice.img}}" />
 			</div>
 		</div>
@@ -51,7 +53,7 @@
 	<!-- グラフ -->
 	<div class="row paddingTop" ng-repeat="choice in poll.choices">
 		<div class="col-xs-1">
-			<span class="pollsRank" ng-hide="poll.maxVoteLength > choice.votes.length">
+			<span class="pollsRank" ng-hide="(poll.maxVoteLength > choice.votes.length) || choice.votes.length == 0">
 				1st !!
 				<span class="glyphicon glyphicon-thumbs-up"></span>
 			</span>

@@ -137,6 +137,22 @@ function PollItemCtrl($scope, $routeParams, socket, Poll) {
 		}
 		return isOpen;
 	};
+	
+	
+	$scope.isLeft = function(imgSide) {
+		console.log(imgSide + " isLeft " + (imgSide === 'left'));
+		return imgSide === 'left';
+	};
+	
+	$scope.hasImg = function(imgUri) {
+		// console.log(imgUri + " hasImg " + (imgUri.length > 0));
+		return imgUri != null && imgUri.length > 0;
+	};
+	
+	$scope.showpoll = function(poll) {
+		console.log('showpoll ', poll);
+		return true;
+	};
 }
 
 // Controller for creating a new poll

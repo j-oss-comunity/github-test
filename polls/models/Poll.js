@@ -16,7 +16,7 @@ exports.PollSchema = new mongoose.Schema({
 	title: { type: String, required: true },
 	question: String,
 	questionImg: String,
-	questionSide: String,
+	questionImgSide: String,
 	openDateTime: String,
 	closeDateTime: String,
 	choices: [choiceSchema]
