@@ -216,3 +216,6 @@ pip-log.txt
 .mr.developer.cfg
 
 node_modules/
+*.js_bk
+polls/public/partials/new.html_bk
+*.css_bk
